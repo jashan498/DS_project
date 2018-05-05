@@ -66,3 +66,104 @@ function parse_grid(grid){ // Given a string of 81 digits (or . or 0 or -), retu
       return false;
   return values;
 }
+
+function assign(values, sq, dig){ // Eliminate all the other values (except dig)
+  ++nassigns;
+  var result = true;
+  var vals = values[sq];
+  for (var d = 0; d < vals.length; d++)
+    if (vals.charAt(d) != dig)
+      result &= (eliminate(values, sq, vals.charAt(d)) ? true : false);
+  return (result ? values : false);
+}
+
+function eliminate(values, sq, dig){
+  ++neliminations;
+  if (values[sq].indexOf(dig) == -1)  // already eliminated.
+    return values;
+  values[sq] = values[sq].replace(dig, "");
+  if (values[sq].length == 0) // invalid input ?
+    return false;
+  else if (values[sq].length == 1){ // If there is only one value (values[sq]) left in square, remove it from peers
+    var result = true;
+    for (var s in peers[sq])
+      result &= (eliminate(values, s, values[sq]) ? true : false);
+    if (!result) return false;
+  }
+  for (var u in units[sq]){
+    var dplaces = [];
+    for (var s in units[sq][u]){
+      var sq2 = units[sq][u][s];
+      if (values[sq2].indexOf(dig) != -1) 
+        dplaces.push(sq2);
+    }
+    if (dplaces.length == 0)
+      return false;
+    else if (dplaces.length == 1)
+      if (!assign(values, dplaces[0], dig))
+        return false;
+  }
+  return values;
+}
+
+function dup(obj){
+  var d = {};
+  for (var f in obj)
+    d[f] = obj[f];
+  return d;
+}
+
+function search(values){
+  ++nsearches;
+  if (!values)
+    return false;
+  var min = 10, max = 1, sq = null;
+  for (var s in squares){
+    if (values[squares[s]].length > max)
+      max = values[squares[s]].length;
+    if (values[squares[s]].length > 1 && values[squares[s]].length < min){
+      min = values[squares[s]].length;
+      sq = squares[s];
+    }
+  }
+
+  if (max == 1)
+    return values;
+  for (var d = 0; d < values[sq].length; d++){
+    var res = search(assign(dup(values), sq, values[sq].charAt(d)));
+    if (res)
+      return res;
+  }
+  return false;
+}
+
+function center(s, w){
+  var excess = w - s.length;
+  while (excess > 0){
+    if (excess%2) s += " "; else s = " " + s;
+    excess -= 1;
+  }
+  return s;
+}
+  
+function board_string(values){ // Used for debugging
+  var width = 0;
+  for (var s in squares)
+    if (values[squares[s]].length > width)
+      width = values[squares[s]].length;
+  width += 1;
+  var seg = "";
+  for (var i = 0; i < width; i++) seg += "---";
+  var line = "\n" + [seg, seg, seg].join("+");
+  var board = "";
+  for (var r in rows){
+    for (var c in cols){
+      board += center(values[rows[r] + cols[c]], width);
+      if (c == 2 || c == 5) board += "|";
+    }
+    if (r == 2 || r == 5) board += line;
+    board += "\n";
+  }
+  board += "\n";
+  return board;
+}
