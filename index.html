@@ -1,30 +1,7 @@
 <html class="jashan_Sudoko_Solver"><head>
     <title>Sudoku Puzzle Solver</title>
     <script src="initialize_grid.js"></script>
-    <script language="javascript">
-    function drawPuzzle(){
-      document.write('<table style="background-color:black;">');
-      for (var R = 0; R < 3; R++){
-        document.write("<tr>\n");
-        for (var C = 0; C < 3; C++){
-          document.write("<td>");
-          document.write('<table style="background-color:gray;">');
-          for (var r = 0; r < 3; r++){
-            document.write("<tr>\n");
-            for (var c = 0; c < 3; c++){
-              var id = rows[R*3 + r] + cols[C*3 + c];
-              document.write('<td><input type="text" maxlength="1" size="1" id="' + id + '" value=""/></td>\n');
-            }
-            document.write("</tr>\n");
-          }
-          document.write('</table>');
-          document.write("</td>");
-        }
-        document.write("</tr>\n");
-      }
-      document.write('</table>');
-    }
-    </script>
+    <script src="solver.js"></script>
   </head>
   <body data-gr-c-s-loaded="true">
     <h1 align="center">Sudoku Puzzle Solver</h1>
