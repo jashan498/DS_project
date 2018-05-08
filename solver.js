@@ -6,16 +6,16 @@ function solve(){
     alert("Invalid Puzzle!!");
     return;
   }
-  var st = new Date();
+
   var sol = search(parse_grid(puzzleText));
-  //var sol = parse_grid(puzzleText);
-  var et = new Date();
+
   if (!sol){
     alert("No solution found!!\n *** Input may be invalid ***");
     return;
   }
   solDiv.innerHTML = "<strong>Solution!</strong><br><pre>" + board_string(sol) + "</pre>\n";
 }
+
 function pick(){
   resetPuzzle();
   var pickIndex = (Math.floor(Math.random()*puzzles.length)%puzzles.length);
@@ -23,6 +23,7 @@ function pick(){
   var solDiv = document.getElementById("solution");
   solDiv.innerHTML = "";
 }
+
 function setPuzzle(puzzleText){
   var digIndex = 0;
   for (var r in rows){
@@ -36,6 +37,7 @@ function setPuzzle(puzzleText){
     }
   }
 }
+
 function resetPuzzle(){
   for (var r in rows){
     for (var c in cols){
@@ -45,6 +47,7 @@ function resetPuzzle(){
     }
   }
 }
+
 function readPuzzle(){
   var puzzleText = "";
   for (var r in rows){
@@ -56,8 +59,9 @@ function readPuzzle(){
   }
   return puzzleText;
 }
+
 function drawPuzzle(){
-  document.write('<table style="background-color:black;">');
+  document.write('<table style="background-color:black; width:400;">');
   for (var R = 0; R < 3; R++){
     document.write("<tr>\n");
     for (var C = 0; C < 3; C++){
