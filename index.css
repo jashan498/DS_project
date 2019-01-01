@@ -54,6 +54,10 @@ input {
   border: none;
 }
 
+.cell {
+  background-color: white;
+}
+
 .label {
   position: absolute;
   color: #aaaaaa;
