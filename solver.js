@@ -34,6 +34,7 @@ function setPuzzle(puzzleText) {
       if (digits.indexOf(dig) != -1) {
         var inpElem = document.getElementById(id);
         inpElem.value = dig;
+        inpElem.style.backgroundColor = "#b5b5b5";
       }
     }
   }
