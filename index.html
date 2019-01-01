@@ -1,12 +1,14 @@
 <html class="jashan_Sudoko_Solver">
   <head>
     <title>Sudoku Puzzle Solver</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script language="javascript">
       var puzzles = [
@@ -40,19 +42,22 @@
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
 
-  <body data-gr-c-s-loaded="true">
+  <body>
     <div class="container">
-      <h1 align="center">Sudoku Puzzle Solver</h1>
+      <h1 align="center">
+        <a href="https://github.com/jashan498/sudoko_solver" class="heading"
+          >Sudoku Puzzle Solver</a
+        >
+      </h1>
       <div align="center">
         <strong
           >Enter Sudoku Puzzle (or
           <a href="javascript:pick();">Generate a random one</a> )</strong
         >
-        <br /><br />
+        <br />
         <script language="javascript">
           drawPuzzle();
         </script>
-        <br />
         <input
           class="btn btn-default btn-lg"
           type="submit"
